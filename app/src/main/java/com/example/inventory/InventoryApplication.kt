@@ -18,6 +18,18 @@ package com.example.inventory
 import android.app.Application
 import com.example.inventory.data.ItemRoomDatabase
 
-class InventoryApplication : Application(){
-    val database: ItemRoomDatabase by lazy { ItemRoomDatabase.getDatabase(this) }
+// We will instantiate the database instance in the Application clas
+class InventoryApplication : Application() {
+
+    // Use lazy delegate so the instance database is lazily created when you first need/access the
+    // reference (rather than when the app starts).
+    val database: ItemRoomDatabase by lazy {
+
+        //  Instantiate the database instance by calling getDatabase() on ItemRoomDatabase passing in the context
+        ItemRoomDatabase.getDatabase(this)
+
+    }
+
 }
+
+//  This will create the database (the physical database on the disk) on the first access.
