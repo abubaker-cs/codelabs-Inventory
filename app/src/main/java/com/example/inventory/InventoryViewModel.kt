@@ -2,7 +2,10 @@ package com.example.inventory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
+import kotlinx.coroutines.launch
 
 // # 1
 // ===
@@ -10,6 +13,47 @@ import com.example.inventory.data.ItemDao
 // Pass in the ItemDao object as a parameter to the default constructor.
 class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 
+    // Insert
+    private fun insertItem(item: Item) {
+
+        /**
+         * Note:
+         * The ViewModelScope is an extension property to the ViewModel class that automatically
+         * cancels its child coroutines when the ViewModel is destroyed.
+         */
+
+        // Starting a coroutine in the ViewModelScope
+        viewModelScope.launch {
+
+            // Initialize the suspend function insert() on itemDao passing in the item
+            itemDao.insert(item)
+
+        }
+
+    }
+
+    // Get
+    private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
+
+        // Name, Price, Quantity
+        return Item(
+            itemName = itemName,
+            itemPrice = itemPrice.toDouble(),
+            quantityInStock = itemCount.toInt()
+        )
+
+    }
+
+    // Add
+    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
+
+        //
+        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
+
+        //
+        insertItem(newItem)
+
+    }
 
 }
 
