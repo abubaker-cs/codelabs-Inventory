@@ -22,7 +22,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.inventory.data.Item
 import com.example.inventory.databinding.FragmentAddItemBinding
 
 /**
@@ -32,11 +35,25 @@ class AddItemFragment : Fragment() {
 
     private val navigationArgs: ItemDetailFragmentArgs by navArgs()
 
+    //
+    lateinit var item: Item
+
+    // Use the by activityViewModels() Kotlin property delegate to share the ViewModel across fragments
+    private val viewModel: InventoryViewModel by activityViewModels {
+
+        // Use the database instance you created previously to call the itemDao constructor.
+        InventoryViewModelFactory(
+            (activity?.application as InventoryApplication).database.itemDao()
+        )
+
+    }
+
     // Binding object instance corresponding to the fragment_add_item.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment
     private var _binding: FragmentAddItemBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +62,59 @@ class AddItemFragment : Fragment() {
     ): View? {
         _binding = FragmentAddItemBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    /**
+     * This validation needs to be done in the ViewModel and not in the Fragment.
+     *
+     * Returns true if the EditTexts are not empty
+     * We will use this function to verify user input before adding or updating the entity in the database.
+     */
+    private fun isEntryValid(): Boolean {
+
+        // Return the value of the viewModel.isEntryValid() function
+        return viewModel.isEntryValid(
+            binding.itemName.text.toString(),
+            binding.itemPrice.text.toString(),
+            binding.itemCount.text.toString()
+        )
+
+    }
+
+    /**
+     * Inserts the new Item into database and navigates up to list fragment.
+     */
+    private fun addNewItem() {
+
+        if (isEntryValid()) {
+
+            viewModel.addNewItem(
+                binding.itemName.text.toString(),
+                binding.itemPrice.text.toString(),
+                binding.itemCount.text.toString(),
+            )
+
+            val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
+            findNavController().navigate(action)
+
+        }
+
+    }
+
+    /**
+     * Called when the view is created.
+     * The itemId Navigation argument determines the edit item  or add new item.
+     * If the itemId is positive, this method retrieves the information from the database and
+     * allows the user to update it.
+     */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.saveAction.setOnClickListener {
+            addNewItem()
+        }
+
     }
 
     /**
