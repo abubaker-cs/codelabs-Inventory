@@ -13,26 +13,27 @@ import kotlinx.coroutines.launch
 // Pass in the ItemDao object as a parameter to the default constructor.
 class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 
-    // Insert
-    private fun insertItem(item: Item) {
 
-        /**
-         * Note:
-         * The ViewModelScope is an extension property to the ViewModel class that automatically
-         * cancels its child coroutines when the ViewModel is destroyed.
-         */
+    // =============================================================== # 1 - Initializer
+    // Add: This will be called from the UI fragment to add Item details to the database.
+    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
 
-        // Starting a coroutine in the ViewModelScope
-        viewModelScope.launch {
+        // Pass in item detail strings to getNewItemEntry() function and assign the returned value
+        // to a val named newItem
+        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
 
-            // Initialize the suspend function insert() on itemDao passing in the item
-            itemDao.insert(item)
-
-        }
+        // Add the new entity to the database
+        insertItem(newItem)
 
     }
 
-    // Get
+    // =============================================================== # 2 - Prepare Item Instance
+    // Prepare the Item Instance
+    // =========================
+    // This function takes in three strings and returns >>> an Item instance:
+    // 1. Name
+    // 2. Item Price
+    // 3. Count (Quantity)
     private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
 
         // Name, Price, Quantity
@@ -44,14 +45,26 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 
     }
 
-    // Add
-    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
 
-        //
-        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
+    // =============================================================== # 3 - Insert using coroutine
+    // Insert
+    private fun insertItem(item: Item) {
 
-        //
-        insertItem(newItem)
+        /**
+         * Note:
+         * The ViewModelScope is an extension property to the ViewModel class that automatically
+         * cancels its child coroutines when the ViewModel is destroyed.
+         *
+         * Suspend functions are only allowed to be called from a coroutine or another suspend function
+         */
+
+        // Starting a coroutine in the ViewModelScope
+        viewModelScope.launch {
+
+            // Initialize the suspend function insert() on itemDao passing in the item
+            itemDao.insert(item)
+
+        }
 
     }
 
