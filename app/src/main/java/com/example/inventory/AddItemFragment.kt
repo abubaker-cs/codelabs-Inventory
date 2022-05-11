@@ -111,6 +111,7 @@ class AddItemFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
+        // save button
         binding.saveAction.setOnClickListener {
             addNewItem()
         }
