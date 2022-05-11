@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.inventory.data.Item
+import com.example.inventory.data.getFormattedPrice
 import com.example.inventory.databinding.ItemListItemBinding
 
 /**
@@ -49,6 +50,19 @@ class ItemListAdapter(private val onItemClicked: (Item) -> Unit) :
 
         // Override the bind() function, pass in the Item object.
         fun bind(item: Item) {
+
+            binding.apply {
+
+                // Name
+                itemName.text = item.itemName
+
+                // Price
+                itemPrice.text = item.getFormattedPrice()
+
+                // Quantity
+                itemQuantity.text = item.quantityInStock.toString()
+
+            }
 
         }
 
