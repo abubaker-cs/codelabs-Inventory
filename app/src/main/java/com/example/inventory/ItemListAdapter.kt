@@ -56,10 +56,10 @@ class ItemListAdapter(private val onItemClicked: (Item) -> Unit) :
                 // Name
                 itemName.text = item.itemName
 
-                // Price
+                // Price: Get the price in currency format using the getFormattedPrice() extension function
                 itemPrice.text = item.getFormattedPrice()
 
-                // Quantity
+                // Quantity: Convert the quantityInStock value to String
                 itemQuantity.text = item.quantityInStock.toString()
 
             }

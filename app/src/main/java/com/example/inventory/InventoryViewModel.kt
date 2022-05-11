@@ -1,8 +1,6 @@
 package com.example.inventory
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
 import kotlinx.coroutines.launch
@@ -12,6 +10,11 @@ import kotlinx.coroutines.launch
 // Extend the InventoryViewModel class from the ViewModel class.
 // Pass in the ItemDao object as a parameter to the default constructor.
 class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
+
+    // This will be used to retrieve items from the database.
+    // 1. The getItems() function returns a Flow
+    // 2. To consume the data as a LiveData value, use the asLiveData() function
+    val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
 
 
     // =============================================================== # 1 - Initializer
