@@ -22,6 +22,7 @@
     tools:context=".ItemDetailFragment"
     >
 
+    <!-- Name -->
     <TextView
         android:id="@+id/item_name"
         style="@style/Widget.Inventory.TextView"
@@ -31,6 +32,7 @@
         tools:text="Screwdrivers"
         />
 
+    <!-- Price -->
     <TextView
         android:id="@+id/item_price"
         style="@style/Widget.Inventory.TextView"
@@ -52,6 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
+    <!-- Count: Quantity -->
     <TextView
         android:id="@+id/item_count"
         style="@style/Widget.Inventory.TextView"

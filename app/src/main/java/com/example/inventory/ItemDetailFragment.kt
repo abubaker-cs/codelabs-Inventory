@@ -39,14 +39,17 @@ class ItemDetailFragment : Fragment() {
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding!!
 
-    //
+    // 01 - We will use this property to store information about a single entity.
     lateinit var item: Item
 
-    //
+    // 02 - ViewModel: Use by delegate to hand off the property initialization to the activityViewModels class
     private val viewModel: InventoryViewModel by activityViewModels {
+
+        // Pass in the InventoryViewModelFactory constructor.
         InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database.itemDao()
         )
+
     }
 
     override fun onCreateView(
@@ -58,25 +61,47 @@ class ItemDetailFragment : Fragment() {
         return binding.root
     }
 
-    //
+    // 03 - This function takes an instance of the Item entity as the parameter and returns nothing.
     private fun bind(item: Item) {
+
+        // apply{} scope function
+        // This approach is similar to what we have done in the ItemListAdapter.kt file
         binding.apply {
+
+            // Name
             itemName.text = item.itemName
+
+            // Price: Formatted value
             itemPrice.text = item.getFormattedPrice()
+
+            // Quantity: Converted to String
             itemCount.text = item.quantityInStock.toString()
+
         }
+
     }
 
-    //
+    // 04 - We previously passed item id as a navigation argument to ItemDetailFragment from
+    // the ItemListFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
 
+        // navigationArgs:
+        // Retrieve and assign the navigation argument to this new variable.
         val id = navigationArgs.itemId
 
+        // retrieveItem:
+        // Defined in the InventoryViewModel.kt, pass the id so the data can be retrieved.
+        // Attach an observer to the returned value passing in the viewLifecycleOwner and a lambda.
         viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) { selectedItem ->
+
+            // Pass in selectedItem as the parameter which contains the Item entity retrieved from the database
             item = selectedItem
+
+            // Call bind() function passing in the item
             bind(item)
+
         }
 
     }

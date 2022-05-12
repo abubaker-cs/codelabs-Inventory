@@ -16,7 +16,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     // 2. To consume the data as a LiveData value, use the asLiveData() function
     val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
 
-    //
+    // It will be used in ItemDetailFragment.kt file to retrieve details of the selected item.
     fun retrieveItem(id: Int): LiveData<Item> {
         return itemDao.getItem(id).asLiveData()
     }
