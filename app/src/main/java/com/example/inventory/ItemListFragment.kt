@@ -34,7 +34,9 @@ class ItemListFragment : Fragment() {
     private var _binding: ItemListFragmentBinding? = null
     private val binding get() = _binding!!
 
-    //
+    // 1. Declare a private immutable property called viewModel of the type InventoryViewModel
+    // 2. Use by delegate to hand off the property initialization to the activityViewModels class.
+    // 3. Pass in the InventoryViewModelFactory constructor.
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database.itemDao()
@@ -53,13 +55,17 @@ class ItemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //
+        // 1. Declare a val named adapter
+        // 2.  Initialize the new adapter property using the default constructor, ItemListAdapter{} passing in nothing.
         val adapter = ItemListAdapter {}
+
+        // 3. Bind the newly created adapter to the recyclerView
         binding.recyclerView.adapter = adapter
 
-        // Observer for data changes
+        // 4. Attach an observer on the allItems to listen for the data changes.
         viewModel.allItems.observe(this.viewLifecycleOwner) { items ->
 
+            // Pass in the new list
             items.let {
 
                 // This will update the RecyclerView with the new items on the list.
