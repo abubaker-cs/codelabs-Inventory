@@ -57,7 +57,18 @@ class ItemListFragment : Fragment() {
 
         // 1. Declare a val named adapter
         // 2.  Initialize the new adapter property using the default constructor, ItemListAdapter{} passing in nothing.
-        val adapter = ItemListAdapter {}
+        val adapter = ItemListAdapter {
+
+            // This will navigate to teh fragment_item_detail.xml file
+            // Assign the returned NavDirections object to action
+            val action =
+                ItemListFragmentDirections.actionItemListFragmentToItemDetailFragment(it.id)
+
+            // 1. Retrieve a NavController instance using this.findNavController()
+            // 2. call navigate() on it passing in the action
+            this.findNavController().navigate(action)
+
+        }
 
         // 3. Bind the newly created adapter to the recyclerView
         binding.recyclerView.adapter = adapter

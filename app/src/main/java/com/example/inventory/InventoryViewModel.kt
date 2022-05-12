@@ -16,6 +16,11 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     // 2. To consume the data as a LiveData value, use the asLiveData() function
     val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
 
+    //
+    fun retrieveItem(id: Int): LiveData<Item> {
+        return itemDao.getItem(id).asLiveData()
+    }
+
 
     // =============================================================== # 1 - Initializer
     // Add: This will be called from the UI fragment to add Item details to the database.

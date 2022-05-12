@@ -22,6 +22,7 @@
     tools:context=".ItemListFragment"
     >
 
+    <!-- Title: Item Name -->
     <TextView
         android:id="@+id/item_name"
         style="@style/Widget.Inventory.Header"
@@ -33,6 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <!-- Title: Price -->
     <TextView
         android:id="@+id/item_price"
         style="@style/Widget.Inventory.Header"
@@ -46,6 +48,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <!-- Title: Quantity -->
     <TextView
         android:id="@+id/item_quantity"
         style="@style/Widget.Inventory.Header"
@@ -69,6 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/item_quantity"
         />
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -79,6 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider"
         />
 
+    <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"

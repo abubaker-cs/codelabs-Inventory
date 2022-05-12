@@ -22,6 +22,7 @@
     android:descendantFocusability="blocksDescendants"
     >
 
+    <!-- Item Name -->
     <TextView
         android:id="@+id/item_name"
         style="@style/Widget.Inventory.ListItemTextView"
@@ -34,6 +35,7 @@
         tools:text="Cogs and Widgets"
         />
 
+    <!-- Price -->
     <TextView
         android:id="@+id/item_price"
         style="@style/Widget.Inventory.ListItemTextView"
@@ -49,6 +51,7 @@
         tools:text="$4.99"
         />
 
+    <!-- Quantity -->
     <TextView
         android:id="@+id/item_quantity"
         style="@style/Widget.Inventory.ListItemTextView"
