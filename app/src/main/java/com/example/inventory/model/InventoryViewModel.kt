@@ -93,22 +93,45 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
      * Launching a new coroutine to update an item in a non-blocking way
      */
     private fun updateItem(item: Item) {
+
+        // Launch a coroutine using the viewModelScope
         viewModelScope.launch {
+
+            // Make a call to the update() suspend method on itemDao class passing in the item
             itemDao.update(item)
+
         }
+
     }
 
     // =============================================================== # * - sellItem
     /**
      * Decreases the stock by one unit and updates the database.
+     * It takes an instance of the Item entity class and returns nothing.
      */
     fun sellItem(item: Item) {
+
+
+        // Check whether the item.quantityInStock is greater than 0.
         if (item.quantityInStock > 0) {
 
             // Decrease the quantity by 1
+            /**
+             * Use copy() function for Data class to update the entity.
+             *
+             * This function is used to copy an object for changing some of its properties,
+             * but keeping the rest of the properties unchanged.
+             *
+             * id
+             * itemName
+             * itemPrice
+             * quantityInStock = Only Change this value and create a new instance
+             *
+             */
             val newItem = item.copy(quantityInStock = item.quantityInStock - 1)
 
-            //
+            // Make a call to the updateItem() function so the query can be executed in a coroutine,
+            // while passing in the new updated entity, that is newItem
             updateItem(newItem)
 
         }

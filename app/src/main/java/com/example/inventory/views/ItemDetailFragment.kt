@@ -84,10 +84,10 @@ class ItemDetailFragment : Fragment() {
             // Quantity: Converted to String
             itemCount.text = item.quantityInStock.toString()
 
-            //
+            // The Sell button should be only enabled if the quantityInStock > 0
             sellItem.isEnabled = viewModel.isStockAvailable(item)
 
-            //
+            // Execute the sellItem() through coroutine in InventoryViewModel.kt file
             sellItem.setOnClickListener { viewModel.sellItem(item) }
 
             //
