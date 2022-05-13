@@ -77,6 +77,17 @@ class ItemDetailFragment : Fragment() {
             // Quantity: Converted to String
             itemCount.text = item.quantityInStock.toString()
 
+            //
+            sellItem.isEnabled = viewModel.isStockAvailable(item)
+
+            //
+            sellItem.setOnClickListener {
+
+                //
+                viewModel.sellItem(item)
+
+            }
+
         }
 
     }
