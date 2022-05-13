@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.inventory
+package com.example.inventory.views
 
 
 import android.os.Bundle
@@ -25,6 +25,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.inventory.InventoryApplication
+import com.example.inventory.InventoryViewModel
+import com.example.inventory.InventoryViewModelFactory
+import com.example.inventory.R
 import com.example.inventory.data.Item
 import com.example.inventory.data.getFormattedPrice
 import com.example.inventory.databinding.FragmentItemDetailBinding
