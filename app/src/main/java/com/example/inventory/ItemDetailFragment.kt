@@ -62,6 +62,9 @@ class ItemDetailFragment : Fragment() {
     }
 
     // 03 - This function takes an instance of the Item entity as the parameter and returns nothing.
+    /**
+     * Binds views with the passed in item data.
+     */
     private fun bind(item: Item) {
 
         // apply{} scope function
@@ -146,7 +149,7 @@ class ItemDetailFragment : Fragment() {
     }
 
     /**
-     * editItem
+     * Navigate to the Edit item screen.
      */
     private fun editItem() {
 
