@@ -142,9 +142,15 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
      * Launching a new coroutine to delete an item in a non-blocking way
      */
     fun deleteItem(item: Item) {
+
+        // launch a coroutine with viewModelScope
         viewModelScope.launch {
+
+            // Call the delete() method on itemDao passing in the item.
             itemDao.delete(item)
+
         }
+
     }
 
     // =============================================================== # * - getUpdatedItemEntry

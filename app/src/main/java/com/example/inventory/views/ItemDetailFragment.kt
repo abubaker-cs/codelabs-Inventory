@@ -90,10 +90,10 @@ class ItemDetailFragment : Fragment() {
             // Execute the sellItem() through coroutine in InventoryViewModel.kt file
             sellItem.setOnClickListener { viewModel.sellItem(item) }
 
-            //
+            // Delete: Confirmation Dialog - YES > deleteItem()
             deleteItem.setOnClickListener { showConfirmationDialog() }
 
-            //
+            // FAB: Edit Button > editItem()
             editItem.setOnClickListener { editItem() }
 
         }
@@ -127,8 +127,10 @@ class ItemDetailFragment : Fragment() {
 
     /**
      * Displays an alert dialog to get the user's confirmation before deleting the item.
+     * YES: Initialize the deleteItem()
      */
     private fun showConfirmationDialog() {
+
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(android.R.string.dialog_alert_title))
             .setMessage(getString(R.string.delete_question))
@@ -138,6 +140,7 @@ class ItemDetailFragment : Fragment() {
                 deleteItem()
             }
             .show()
+
     }
 
     /**
@@ -145,10 +148,12 @@ class ItemDetailFragment : Fragment() {
      */
     private fun deleteItem() {
 
-        //
+        // Initialize the deleteItem() on the viewModel, pass in the item
+        // Note: the item instance contains the entity currently displayed on the Item Details screen.
         viewModel.deleteItem(item)
 
-        //
+        // Attempts to navigate up in the navigation hierarchy
+        // i.e. after deleting move back to the ItemListFragment
         findNavController().navigateUp()
     }
 
