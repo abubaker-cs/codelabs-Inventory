@@ -96,6 +96,13 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
     }
 
+    // =============================================================== # * - deleteItem
+    fun deleteItem(item: Item) {
+        viewModelScope.launch {
+            itemDao.delete(item)
+        }
+    }
+
     // =============================================================== # * - isStockAvailable
     fun isStockAvailable(item: Item): Boolean {
         return (item.quantityInStock > 0)

@@ -81,12 +81,13 @@ class ItemDetailFragment : Fragment() {
             sellItem.isEnabled = viewModel.isStockAvailable(item)
 
             //
-            sellItem.setOnClickListener {
+            sellItem.setOnClickListener { viewModel.sellItem(item) }
 
-                //
-                viewModel.sellItem(item)
+            //
+            deleteItem.setOnClickListener { showConfirmationDialog() }
 
-            }
+            //
+            editItem.setOnClickListener { editItem() }
 
         }
 
@@ -136,7 +137,27 @@ class ItemDetailFragment : Fragment() {
      * Deletes the current item and navigates to the list fragment.
      */
     private fun deleteItem() {
+
+        //
+        viewModel.deleteItem(item)
+
+        //
         findNavController().navigateUp()
+    }
+
+    /**
+     * editItem
+     */
+    private fun editItem() {
+
+        //
+        val action = ItemDetailFragmentDirections.actionItemDetailFragmentToAddItemFragment(
+            getString(R.string.edit_fragment_title),
+            item.id
+        )
+
+        //
+        this.findNavController().navigate(action)
     }
 
     /**
