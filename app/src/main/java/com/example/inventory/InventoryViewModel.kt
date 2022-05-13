@@ -17,6 +17,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
 
     // It will be used in ItemDetailFragment.kt file to retrieve details of the selected item.
+    /**
+     * Retrieve an item from the repository.
+     */
     fun retrieveItem(id: Int): LiveData<Item> {
         return itemDao.getItem(id).asLiveData()
     }
@@ -24,6 +27,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 
     // =============================================================== # 1 - Initializer
     // Add: This will be called from the UI fragment to add Item details to the database.
+    /**
+     * Inserts the new Item into database.
+     */
     fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
 
         // Pass in item detail strings to getNewItemEntry() function and assign the returned value
@@ -42,6 +48,10 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     // 1. Name
     // 2. Item Price
     // 3. Count (Quantity)
+    /**
+     * Returns an instance of the [Item] entity class with the item info entered by the user.
+     * This will be used to add a new entry to the Inventory database.
+     */
     private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
 
         // Name, Price, Quantity
@@ -55,7 +65,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 
 
     // =============================================================== # 3 - Insert using coroutine
-    // Insert
+    /**
+     * Launching a new coroutine to insert an item in a non-blocking way
+     */
     private fun insertItem(item: Item) {
 
         /**
@@ -77,6 +89,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     // =============================================================== # * - updateItem
+    /**
+     * Launching a new coroutine to update an item in a non-blocking way
+     */
     private fun updateItem(item: Item) {
         viewModelScope.launch {
             itemDao.update(item)
@@ -84,6 +99,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     // =============================================================== # * - sellItem
+    /**
+     * Decreases the stock by one unit and updates the database.
+     */
     fun sellItem(item: Item) {
         if (item.quantityInStock > 0) {
 
@@ -97,6 +115,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     // =============================================================== # * - deleteItem
+    /**
+     * Launching a new coroutine to delete an item in a non-blocking way
+     */
     fun deleteItem(item: Item) {
         viewModelScope.launch {
             itemDao.delete(item)
@@ -104,6 +125,10 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     // =============================================================== # * - getUpdatedItemEntry
+    /**
+     * Called to update an existing entry in the Inventory database.
+     * Returns an instance of the [Item] entity class with the item info updated by the user.
+     */
     private fun getUpdatedItemEntry(
         itemId: Int,
         itemName: String,
@@ -119,6 +144,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     // =============================================================== # * - updateItem
+    /**
+     * Updates an existing Item in the database.
+     */
     fun updateItem(
         itemId: Int,
         itemName: String,
@@ -129,12 +157,18 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         updateItem(updatedItem)
     }
 
-    // =============================================================== # * - isStockAvailable
+    // =============================================================== # * - isStockAvailable.
+    /**
+     * Returns true if stock is available to sell, false otherwise.
+     */
     fun isStockAvailable(item: Item): Boolean {
         return (item.quantityInStock > 0)
     }
 
     // =============================================================== # * - Validation
+    /**
+     * Returns true if the EditTexts are not empty
+     */
     fun isEntryValid(itemName: String, itemPrice: String, itemCount: String): Boolean {
 
         // Return FALSE if any EditText field is empty
@@ -156,6 +190,9 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 // ==============================================
 // 1. Pass in the same constructor parameter as the InventoryViewModel that is the ItemDao instance.
 // 2. Extend the class from the ViewModelProvider.Factory class.
+/**
+ * Factory class to instantiate the [ViewModel] instance.
+ */
 class InventoryViewModelFactory(private val itemDao: ItemDao) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

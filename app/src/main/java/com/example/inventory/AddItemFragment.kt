@@ -39,7 +39,8 @@ class AddItemFragment : Fragment() {
     //
     lateinit var item: Item
 
-    // Use the by activityViewModels() Kotlin property delegate to share the ViewModel across fragments
+    // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
+    // to share the ViewModel across fragments.
     private val viewModel: InventoryViewModel by activityViewModels {
 
         // Use the database instance you created previously to call the itemDao constructor.
@@ -66,7 +67,9 @@ class AddItemFragment : Fragment() {
     }
 
 
-    //
+    /**
+     * Binds views with the passed in [item] information.
+     */
     private fun bind(item: Item) {
 
         //
@@ -80,7 +83,7 @@ class AddItemFragment : Fragment() {
 
             saveAction.setOnClickListener { updateItem() }
         }
-        
+
     }
 
     /**
@@ -120,7 +123,9 @@ class AddItemFragment : Fragment() {
 
     }
 
-    // updateItem
+    /**
+     * Updates an existing Item in the database and navigates up to list fragment.
+     */
     private fun updateItem() {
 
         if (isEntryValid()) {
