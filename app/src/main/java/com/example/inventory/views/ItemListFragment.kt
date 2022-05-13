@@ -24,8 +24,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.inventory.*
+import com.example.inventory.InventoryApplication
+import com.example.inventory.ItemListAdapter
+import com.example.inventory.R
 import com.example.inventory.databinding.ItemListFragmentBinding
+import com.example.inventory.model.InventoryViewModel
+import com.example.inventory.model.InventoryViewModelFactory
 
 /**
  * Main fragment displaying details for all items in the database.

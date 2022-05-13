@@ -27,10 +27,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.inventory.InventoryApplication
-import com.example.inventory.InventoryViewModel
-import com.example.inventory.InventoryViewModelFactory
 import com.example.inventory.data.Item
 import com.example.inventory.databinding.FragmentAddItemBinding
+import com.example.inventory.model.InventoryViewModel
+import com.example.inventory.model.InventoryViewModelFactory
 
 /**
  * Fragment to add or update an item in the Inventory database.
