@@ -93,7 +93,7 @@ class ItemDetailFragment : Fragment() {
             // Delete: Confirmation Dialog - YES > deleteItem()
             deleteItem.setOnClickListener { showConfirmationDialog() }
 
-            // FAB: Edit Button > editItem()
+            // FAB: Edit Button > editItem() | Pass on new screen title with the item id
             editItem.setOnClickListener { editItem() }
 
         }
@@ -179,13 +179,19 @@ class ItemDetailFragment : Fragment() {
      */
     private fun editItem() {
 
-        //
+        // Pass on the new screen title and current item id
+        // We are reusing the "Add Item Fragment" for "Edit Mode"
         val action = ItemDetailFragmentDirections.actionItemDetailFragmentToAddItemFragment(
+
+            // New Title: "Edit Item" as defined in the strings.xml file
             getString(R.string.edit_fragment_title),
+
+            // Pass on the current item id
             item.id
+
         )
 
-        //
+        //  Navigate to the Edit Item screen.
         this.findNavController().navigate(action)
     }
 
