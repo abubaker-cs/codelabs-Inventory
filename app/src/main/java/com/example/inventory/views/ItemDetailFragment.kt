@@ -128,17 +128,32 @@ class ItemDetailFragment : Fragment() {
     /**
      * Displays an alert dialog to get the user's confirmation before deleting the item.
      * YES: Initialize the deleteItem()
+     * Calls deleteItem() function when the positive button is tapped
      */
     private fun showConfirmationDialog() {
 
         MaterialAlertDialogBuilder(requireContext())
+
+            // Title
             .setTitle(getString(android.R.string.dialog_alert_title))
+
+            // Description
             .setMessage(getString(R.string.delete_question))
+
+            // False:
+            // 1. Sets whether this dialog is cancelable with the BACK key.
+            // 2. User cannot candle the dialog by clicking on the blank area outside the dialog
             .setCancelable(false)
+
+            // NO: Hide the confirmation dialog
             .setNegativeButton(getString(R.string.no)) { _, _ -> }
+
+            // YES: Initialize the deleteItem() function
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 deleteItem()
             }
+
+            // Show the dialog
             .show()
 
     }
@@ -155,6 +170,7 @@ class ItemDetailFragment : Fragment() {
         // Attempts to navigate up in the navigation hierarchy
         // i.e. after deleting move back to the ItemListFragment
         findNavController().navigateUp()
+
     }
 
     /**
