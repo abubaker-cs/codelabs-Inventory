@@ -75,16 +75,24 @@ class AddItemFragment : Fragment() {
      */
     private fun bind(item: Item) {
 
-        //
+        // round the price to two decimal places using the format() function
         val price = "%.2f".format(item.itemPrice)
 
-        //
+        //  Use the apply scope function on the binding property
         binding.apply {
+
+            // Name
             itemName.setText(item.itemName, TextView.BufferType.SPANNABLE)
+
+            // Price
             itemPrice.setText(price, TextView.BufferType.SPANNABLE)
+
+            // Quantity
             itemCount.setText(item.quantityInStock.toString(), TextView.BufferType.SPANNABLE)
 
+            // Button: Save > updateItem()
             saveAction.setOnClickListener { updateItem() }
+
         }
 
     }
@@ -131,20 +139,29 @@ class AddItemFragment : Fragment() {
      */
     private fun updateItem() {
 
+        // Returns true if the EditTexts are not empty
         if (isEntryValid()) {
 
-            //
             viewModel.updateItem(
+
+                // Item ID (Get from Navigation Args)
                 this.navigationArgs.itemId,
+
+                // Name
                 this.binding.itemName.text.toString(),
+
+                // Price
                 this.binding.itemPrice.text.toString(),
+
+                // Count (Quantity)
                 this.binding.itemCount.text.toString()
+
             )
 
-            //
+            // Prepare the action to navigate the user to the ListFragment view once the item will be saved
             val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
 
-            //
+            // Initialize the navigation process.
             findNavController().navigate(action)
 
         }
@@ -159,24 +176,26 @@ class AddItemFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        //
         super.onViewCreated(view, savedInstanceState)
 
-        //
+        //  Retrieve itemId from the navigation arguments
         val id = navigationArgs.itemId
 
-        //
+        // If the ID Exists
         if (id > 0) {
 
-            //
+            // Retrieve the entity using the id and add an observer on it.
             viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) { selectedItem ->
+
+                // Update the item property and call bind() passing in the item
                 item = selectedItem
                 bind(item)
+
             }
 
         } else {
 
-            //
+            // Save > addNewItem()
             binding.saveAction.setOnClickListener {
                 addNewItem()
             }

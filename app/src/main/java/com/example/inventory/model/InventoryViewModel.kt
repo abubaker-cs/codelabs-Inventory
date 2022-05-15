@@ -158,32 +158,50 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
      * Called to update an existing entry in the Inventory database.
      * Returns an instance of the [Item] entity class with the item info updated by the user.
      */
+
+    // It takes an Int, and three strings for the entity details named itemName, itemPrice and itemCount
+    // Return an instance of the Item from the function.
     private fun getUpdatedItemEntry(
         itemId: Int,
         itemName: String,
         itemPrice: String,
         itemCount: String
     ): Item {
+
+        // Return the Item instance from the function.
         return Item(
             id = itemId,
             itemName = itemName,
             itemPrice = itemPrice.toDouble(),
             quantityInStock = itemCount.toInt()
         )
+
     }
 
     // =============================================================== # * - updateItem
     /**
      * Updates an existing Item in the database.
      */
+    // This function also takes an Int and three strings for the entity details
+    // and returns nothing.
     fun updateItem(
         itemId: Int,
         itemName: String,
         itemPrice: String,
         itemCount: String
     ) {
-        val updatedItem = getUpdatedItemEntry(itemId, itemName, itemPrice, itemCount)
+
+        // Make a call to the getUpdatedItemEntry() function passing in the entity information
+        val updatedItem = getUpdatedItemEntry(
+            itemId,
+            itemName,
+            itemPrice,
+            itemCount
+        )
+
+        // Make a call to the updateItem() function passing in the updatedItem
         updateItem(updatedItem)
+
     }
 
     // =============================================================== # * - isStockAvailable.
