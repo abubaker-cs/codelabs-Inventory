@@ -127,7 +127,10 @@ class AddItemFragment : Fragment() {
                 binding.itemCount.text.toString(),
             )
 
+            // Prepare the action to navigate the user to the ListFragment view once the item will be saved
             val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
+
+            // Initialize the navigation process.
             findNavController().navigate(action)
 
         }
