@@ -25,11 +25,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.inventory.InventoryApplication
+import com.example.inventory.BaseApplication
 import com.example.inventory.R
-import com.example.inventory.data.Item
-import com.example.inventory.data.getFormattedPrice
 import com.example.inventory.databinding.FragmentItemDetailBinding
+import com.example.inventory.model.Item
+import com.example.inventory.model.getFormattedPrice
 import com.example.inventory.ui.viewmodel.InventoryViewModel
 import com.example.inventory.ui.viewmodel.InventoryViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -51,7 +51,7 @@ class ItemDetailFragment : Fragment() {
 
         // Pass in the InventoryViewModelFactory constructor.
         InventoryViewModelFactory(
-            (activity?.application as InventoryApplication).database.itemDao()
+            (activity?.application as BaseApplication).database.itemDao()
         )
 
     }

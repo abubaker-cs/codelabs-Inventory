@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.inventory.model.Item
 
 // public abstract class that extends RoomDatabase
 // This new abstract class you defined acts as a database holder
@@ -71,5 +72,5 @@ abstract class ItemRoomDatabase : RoomDatabase() {
 /**
  * Note:  will instantiate the database instance in the Application class
  *
- * DB Initializer File: InventoryApplication.kt
+ * DB Initializer File: BaseApplication.kt
  */

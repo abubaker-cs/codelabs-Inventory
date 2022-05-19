@@ -1,8 +1,8 @@
 package com.example.inventory.ui.viewmodel
 
 import androidx.lifecycle.*
-import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
+import com.example.inventory.model.Item
 import kotlinx.coroutines.launch
 
 // # 1

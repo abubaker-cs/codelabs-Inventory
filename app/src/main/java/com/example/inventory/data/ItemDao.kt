@@ -1,6 +1,7 @@
 package com.example.inventory.data
 
 import androidx.room.*
+import com.example.inventory.model.Item
 import kotlinx.coroutines.flow.Flow
 
 @Dao

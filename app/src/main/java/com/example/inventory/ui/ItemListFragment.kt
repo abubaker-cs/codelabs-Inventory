@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.inventory.InventoryApplication
+import com.example.inventory.BaseApplication
 import com.example.inventory.R
 import com.example.inventory.databinding.ItemListFragmentBinding
 import com.example.inventory.ui.adapter.ItemListAdapter
@@ -44,7 +44,7 @@ class ItemListFragment : Fragment() {
     // 3. Pass in the InventoryViewModelFactory constructor.
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModelFactory(
-            (activity?.application as InventoryApplication).database.itemDao()
+            (activity?.application as BaseApplication).database.itemDao()
         )
     }
 

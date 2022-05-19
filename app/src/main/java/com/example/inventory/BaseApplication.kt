@@ -18,8 +18,8 @@ package com.example.inventory
 import android.app.Application
 import com.example.inventory.data.ItemRoomDatabase
 
-// We will instantiate the database instance in the Application clas
-class InventoryApplication : Application() {
+// We will instantiate the database instance in the Application class
+class BaseApplication : Application() {
 
     // Use lazy delegate so the instance database is lazily created when you first need/access the
     // reference (rather than when the app starts).
