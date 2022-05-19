@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.inventory.views
+package com.example.inventory.ui
 
 
 import android.os.Bundle
@@ -30,8 +30,8 @@ import com.example.inventory.R
 import com.example.inventory.data.Item
 import com.example.inventory.data.getFormattedPrice
 import com.example.inventory.databinding.FragmentItemDetailBinding
-import com.example.inventory.model.InventoryViewModel
-import com.example.inventory.model.InventoryViewModelFactory
+import com.example.inventory.ui.viewmodel.InventoryViewModel
+import com.example.inventory.ui.viewmodel.InventoryViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**

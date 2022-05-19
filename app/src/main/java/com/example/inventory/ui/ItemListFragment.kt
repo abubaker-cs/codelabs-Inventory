@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.inventory.views
+package com.example.inventory.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,10 +26,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.inventory.InventoryApplication
 import com.example.inventory.R
-import com.example.inventory.adapters.ItemListAdapter
 import com.example.inventory.databinding.ItemListFragmentBinding
-import com.example.inventory.model.InventoryViewModel
-import com.example.inventory.model.InventoryViewModelFactory
+import com.example.inventory.ui.adapter.ItemListAdapter
+import com.example.inventory.ui.viewmodel.InventoryViewModel
+import com.example.inventory.ui.viewmodel.InventoryViewModelFactory
 
 /**
  * Main fragment displaying details for all items in the database.

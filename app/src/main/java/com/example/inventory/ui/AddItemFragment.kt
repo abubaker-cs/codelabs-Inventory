@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.inventory.views
+package com.example.inventory.ui
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
@@ -29,8 +29,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.inventory.InventoryApplication
 import com.example.inventory.data.Item
 import com.example.inventory.databinding.FragmentAddItemBinding
-import com.example.inventory.model.InventoryViewModel
-import com.example.inventory.model.InventoryViewModelFactory
+import com.example.inventory.ui.viewmodel.InventoryViewModel
+import com.example.inventory.ui.viewmodel.InventoryViewModelFactory
 
 /**
  * Fragment to add or update an item in the Inventory database.

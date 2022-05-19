@@ -1,4 +1,4 @@
-package com.example.inventory.model
+package com.example.inventory.ui.viewmodel
 
 import androidx.lifecycle.*
 import com.example.inventory.data.Item
