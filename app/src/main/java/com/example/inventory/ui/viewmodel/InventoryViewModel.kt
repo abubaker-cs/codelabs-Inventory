@@ -30,14 +30,26 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     /**
      * Inserts the new Item into database.
      */
-    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
+    fun addNewItem(
+        itemName: String,
+        itemPrice: String,
+        itemCount: String
+    ) {
 
         // Pass in item detail strings to getNewItemEntry() function and assign the returned value
         // to a val named newItem
-        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
+        val newItem = getNewItemEntry(
+            itemName,
+            itemPrice,
+            itemCount
+        )
 
-        // Add the new entity to the database
-        insertItem(newItem)
+        viewModelScope.launch {
+
+            // Add the new entity to the database
+            insertItem(newItem)
+
+        }
 
     }
 
